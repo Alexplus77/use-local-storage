@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "App.css";
 
-function App() {
+/**
+ * Напиши кастомный хук useLocalStorage для работы с локальным хранилищем
+ * принцип работы - у нас есть поле для ввода - все, что вводит туда
+ * пользователь должно сохранятся после перезагрузки страницы.
+ * Если пользователь очистил
+ * поле ввода, после перезагрузки, инпут должен быть пустым
+ * то есть должно запоминать, что вводит пользователь.
+ * хук принимает два заначения 1. key - ключ по которому хранится значение
+ * в localStorage 2 значение по умолчанию, которое вводится в инпуте
+ * если у нас в localStorage ничего не сохранено.
+ */
+import useLocalStorage from "hooks/useLocalStorage";
+
+export default function App() {
+  const [name, setName] = useLocalStorage("input", "Значение по умолчанию");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input
+        onFocus={(e) => (e.target.value = "")}
+        value={name}
+        onChange={(e) => setName(e)}
+        type="text"
+      />
     </div>
   );
 }
-
-export default App;
