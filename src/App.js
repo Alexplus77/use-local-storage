@@ -12,16 +12,19 @@ import "App.css";
  * если у нас в localStorage ничего не сохранено.
  */
 import useLocalStorage from "hooks/useLocalStorage";
+import { useState } from "react";
 
 export default function App() {
   const [name, setName] = useLocalStorage("input", "Значение по умолчанию");
-
+  const [blurInput, setBlur] = useState("");
+  console.log(blurInput);
   return (
     <div>
       <input
-        onFocus={(e) => (e.target.value = "")}
-        value={name}
+        value={!name.trim() ? name.trim() : name}
         onChange={(e) => setName(e)}
+        onBlur={() => !name.trim() && setBlur("Введите значение")}
+        placeholder={blurInput}
         type="text"
       />
     </div>
