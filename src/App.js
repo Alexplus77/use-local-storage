@@ -20,7 +20,7 @@ export default function App() {
       <input
         value={name}
         onChange={(e) => setName(e)}
-        placeholder={!name.trim() ? "Введите значение" : null}
+        placeholder="Введите значение"
         type="text"
       />
     </div>
